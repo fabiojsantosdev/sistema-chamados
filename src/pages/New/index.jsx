@@ -5,12 +5,13 @@ import { useState, useEffect, useContext, useRef } from 'react';
 import { AuthContext } from '../../contexts/auth';
 import firebase from '../../services/firebaseConnection';
 import { toast } from 'react-toastify';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import './new.css';
 
 
 export function New() {
     const { id } = useParams();
+    const navigate = useNavigate();
     const [customers, setCustomers] = useState([]);
     const [customersSelected, setCustomersSelected] = useState(0);
     const [loadCustomers, setLoadCustomers] = useState(true);
@@ -94,11 +95,12 @@ export function New() {
                 userId: user.uid
             })
             .then(()=>{
+                console.log("🚀 ~ file: index.jsx ~ line 101 ~ .then ~ window.location.pathname", window.location.pathname);
                 toast.success('Chamado editado com sucesso');
                 setCustomersSelected(0);
                 setComplemento('');
-                window.location.pathname = '/dashboard';
-                console.log("🚀 ~ file: index.jsx ~ line 101 ~ .then ~ window.location.pathname", window.location.pathname);
+                navigate('/dashboard');
+                
                 
             })
             .catch((err)=>{
