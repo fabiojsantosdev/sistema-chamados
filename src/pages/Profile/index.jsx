@@ -1,6 +1,5 @@
 import { useState, useContext } from 'react';
 import { AuthContext } from '../../contexts/auth';
-import { useNavigate } from 'react-router-dom';
 import { Header } from '../../components/Header';
 import { Title } from '../../components/Title';
 import { FiSettings, FiUpload } from 'react-icons/fi';
@@ -12,7 +11,6 @@ import './profile.css';
 
 
 export function Profile() {
-    const navigate = useNavigate();
     const { user, signOut, setUser, storageUser } = useContext(AuthContext);
     const [nome, setNome] = useState(user && user.nome);
     const [email, setEmail] = useState(user && user.email);
@@ -101,7 +99,7 @@ export function Profile() {
 
                 } else if (result.isDenied || result.isDismissed) {
                     Swal.fire('As alterações não foram salvas.', '', 'info').then(()=> {
-                        navigate('/profile', {replace: true});
+                        window.location.reload();
                     })
 
                 }
@@ -122,12 +120,12 @@ export function Profile() {
                 if (result.isConfirmed) {
                     handleUpload();
                     Swal.fire('Perfil alterado com Sucesso!', '', 'success').then(()=> {
-                        navigate('/profile', {replace: true});
+                        window.location.reload();
                     })
 
                 } else if (result.isDenied || result.isDismissed) {
                     Swal.fire('As alterações não foram salvas.', '', 'info').then(()=> {
-                        navigate('/profile', {replace: true});
+                        window.location.reload();
                     })
 
                 }
