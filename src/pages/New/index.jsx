@@ -95,7 +95,6 @@ export function New() {
                 userId: user.uid
             })
             .then(()=>{
-                console.log("🚀 ~ file: index.jsx ~ line 101 ~ .then ~ window.location.pathname", window.location.pathname);
                 toast.success('Chamado editado com sucesso');
                 setCustomersSelected(0);
                 setComplemento('');
