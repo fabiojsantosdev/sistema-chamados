@@ -94,7 +94,7 @@ export function Profile() {
                             storageUser(data);
                         })
                     Swal.fire('Perfil alterado com Sucesso!', '', 'success').then(()=> {
-                        window.location.reload();
+                        
                     })
 
                 } else if (result.isDenied || result.isDismissed) {
