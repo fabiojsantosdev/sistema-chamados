@@ -122,12 +122,12 @@ export function Profile() {
                 if (result.isConfirmed) {
                     handleUpload();
                     Swal.fire('Perfil alterado com Sucesso!', '', 'success').then(()=> {
-                        window.location.reload();
+                        navigate('/profile');
                     })
 
                 } else if (result.isDenied || result.isDismissed) {
                     Swal.fire('As alterações não foram salvas.', '', 'info').then(()=> {
-                        window.location.reload();
+                        navigate('/profile');
                     })
 
                 }
