@@ -2,19 +2,19 @@
 
 # Tela de Login
 
-(https://drive.google.com/file/d/1Pep-Xma20znO1hitzu4aEYddHLwva97H/view?usp=sharing)
+<a href="https://ibb.co/sVF2dH0"><img src="https://i.ibb.co/0GfcRtg/login.png" alt="login" border="0"></a>
 
 # Tela chamados
 
-https://drive.google.com/file/d/1Pep-Xma20znO1hitzu4aEYddHLwva97H/view?usp=sharing
+<a href="https://ibb.co/BCwbwWr"><img src="https://i.ibb.co/ZMN5N4Y/chamados.png" alt="chamados" border="0"></a>
 
 # Modal
 
-https://drive.google.com/file/d/1Pep-Xma20znO1hitzu4aEYddHLwva97H/view?usp=sharing
+<a href="https://imgbb.com/"><img src="https://i.ibb.co/3frMKcC/modal.png" alt="modal" border="0"></a>
 
 # Cadastro Clientes
 
-https://drive.google.com/file/d/1ZzCF-z1Ak2tHPFx5Z_MIw5TXVHfFs_Ji/view?usp=sharing
+<a href="https://ibb.co/0jNbhhD"><img src="https://i.ibb.co/8D3Z66K/clientes.png" alt="clientes" border="0"></a>
 
 
 
