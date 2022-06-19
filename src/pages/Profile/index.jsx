@@ -101,7 +101,7 @@ export function Profile() {
 
                 } else if (result.isDenied || result.isDismissed) {
                     Swal.fire('As alterações não foram salvas.', '', 'info').then(()=> {
-                        navigate('/profile');
+                        navigate('/profile', {replace: true});
                     })
 
                 }
@@ -122,12 +122,12 @@ export function Profile() {
                 if (result.isConfirmed) {
                     handleUpload();
                     Swal.fire('Perfil alterado com Sucesso!', '', 'success').then(()=> {
-                        navigate('/profile');
+                        navigate('/profile', {replace: true});
                     })
 
                 } else if (result.isDenied || result.isDismissed) {
                     Swal.fire('As alterações não foram salvas.', '', 'info').then(()=> {
-                        navigate('/profile');
+                        navigate('/profile', {replace: true});
                     })
 
                 }
