@@ -7,7 +7,6 @@ import avatar from '../../assets/avatar.png';
 import firebase from '../../services/firebaseConnection';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
-import { useNavigate } from 'react-router-dom';
 import './profile.css';
 
 
@@ -101,7 +100,7 @@ export function Profile() {
 
                 } else if (result.isDenied || result.isDismissed) {
                     Swal.fire('As alterações não foram salvas.', '', 'info').then(()=> {
-                        redirect('/dashboard');
+                        window.location.reload();
                     })
 
                 }
@@ -122,12 +121,12 @@ export function Profile() {
                 if (result.isConfirmed) {
                     handleUpload();
                     Swal.fire('Perfil alterado com Sucesso!', '', 'success').then(()=> {
-                        redirect('/dashboard');
+                        window.location.reload();
                     })
 
                 } else if (result.isDenied || result.isDismissed) {
                     Swal.fire('As alterações não foram salvas.', '', 'info').then(()=> {
-                        redirect('/dashboard');
+                        window.location.reload();
                     })
 
                 }
