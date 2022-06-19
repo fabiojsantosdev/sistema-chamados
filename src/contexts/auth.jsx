@@ -1,12 +1,13 @@
 import { useEffect, useState, createContext } from 'react';
 import firebase from '../services/firebaseConnection';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 export const AuthContext = createContext({});
 
 
 function AuthProvider({ children }) {
-
+    const navigate = useNavigate();
     const [user, setUser] = useState(null);
     const [loadingAuth, setLoadingAuth] = useState(false);
     //const [loading, setLoading] = useState(true);
@@ -114,7 +115,7 @@ function AuthProvider({ children }) {
         await firebase.auth().signOut();
         localStorage.removeItem('SistemaUser');
         setUser(null);
-        window.location.pathname = '/'
+        navigate('/');
     }
 
     return (

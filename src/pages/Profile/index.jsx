@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
 import { AuthContext } from '../../contexts/auth';
-import './profile.css';
+import { useNavigate } from 'react-router-dom';
 import { Header } from '../../components/Header';
 import { Title } from '../../components/Title';
 import { FiSettings, FiUpload } from 'react-icons/fi';
@@ -8,9 +8,11 @@ import avatar from '../../assets/avatar.png';
 import firebase from '../../services/firebaseConnection';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
+import './profile.css';
+
 
 export function Profile() {
-
+    const navigate = useNavigate();
     const { user, signOut, setUser, storageUser } = useContext(AuthContext);
     const [nome, setNome] = useState(user && user.nome);
     const [email, setEmail] = useState(user && user.email);
@@ -99,7 +101,7 @@ export function Profile() {
 
                 } else if (result.isDenied || result.isDismissed) {
                     Swal.fire('As alterações não foram salvas.', '', 'info').then(()=> {
-                        window.location.reload();
+                        navigate('/profile');
                     })
 
                 }
