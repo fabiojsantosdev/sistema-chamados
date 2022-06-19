@@ -1,7 +1,7 @@
 # Sistema de Chamados - Curso Udemy
 
 # Tela de Login
-<img src="https://drive.google.com/file/d/1Pep-Xma20znO1hitzu4aEYddHLwva97H/view?usp=sharing" width="350" title="hover text">
+
 (https://drive.google.com/file/d/1Pep-Xma20znO1hitzu4aEYddHLwva97H/view?usp=sharing)
 
 # Tela chamados
