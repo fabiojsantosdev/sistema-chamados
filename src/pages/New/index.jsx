@@ -98,6 +98,8 @@ export function New() {
                 setCustomersSelected(0);
                 setComplemento('');
                 window.location.pathname = '/dashboard';
+                console.log("🚀 ~ file: index.jsx ~ line 101 ~ .then ~ window.location.pathname", window.location.pathname);
+                
             })
             .catch((err)=>{
                 console.log('Erro ao editar chamado', err);
