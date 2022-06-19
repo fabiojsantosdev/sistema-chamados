@@ -11,7 +11,7 @@ import './profile.css';
 
 
 export function Profile() {
-    const redirect = useNavigate();
+    
     const { user, signOut, setUser, storageUser } = useContext(AuthContext);
     const [nome, setNome] = useState(user && user.nome);
     const [email, setEmail] = useState(user && user.email);
