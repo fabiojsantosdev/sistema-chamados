@@ -6,7 +6,7 @@
 
 # Tela chamados
 
-<a href="https://ibb.co/BCwbwWr"><img src="https://i.ibb.co/ZMN5N4Y/chamados.png" alt="chamados" border="0"></a>
+<a href="https://ibb.co/pLRyDSx"><img src="https://i.ibb.co/mcX8s3G/chamados.png" alt="chamados" border="0"></a>
 
 # Modal
 
