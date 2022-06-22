@@ -1,18 +1,23 @@
+import { useState, useEffect } from 'react';
 import { Header } from '../../components/Header';
 import { Title } from '../../components/Title';
 import { AiOutlineDashboard } from "react-icons/ai";
-import { FiPlus, FiSearch, FiEdit2 } from "react-icons/fi";
+import { FiPlus } from "react-icons/fi";
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { Button } from 'primereact/button';
+import 'primereact/resources/themes/nova-alt/theme.css';
 import firebase from '../../services/firebaseConnection';
 import { format } from 'date-fns';
 import Modal from '../../components/Modal';
+import { useNavigate } from 'react-router-dom';
 import './dashboard.css';
 
 const listRef = firebase.firestore().collection('chamados').orderBy('created', 'desc');
 
 export function Dashboard() {
-
+  const navigate = useNavigate();
   const [chamados, setChamados] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
@@ -30,7 +35,7 @@ export function Dashboard() {
 
 
   async function loadChamados() {
-    await listRef.limit(10)
+    await listRef.limit(10000)
     .get()
     .then((snapshot) => {
       updateState(snapshot)
@@ -80,20 +85,36 @@ export function Dashboard() {
   }
 
 
-  async function handleMore() {
-    setLoadingMore(true);
-    await listRef.startAfter(lastDocs).limit(10)
-      .get()
-      .then((snapshot) => {
-        updateState(snapshot)
-      })
-  }
+  // async function handleMore() {
+  //   setLoadingMore(true);
+  //   await listRef.startAfter(lastDocs).limit(100)
+  //     .get()
+  //     .then((snapshot) => {
+  //       updateState(snapshot)
+  //     })
+  // }
 
-  function togglePostModal(item){
+  function togglePostModal(rowData){
     setShowPostModal(!showPostModal);
-    setDetail(item);
+    setDetail(rowData);
+    console.log(rowData);
+    
   }
 
+  const actionBodyTemplate = (rowData) => {
+    return (
+        <>
+            <Button icon="pi pi-search" className="p-button-rounded p-button-info mr-2" onClick={()=> togglePostModal(rowData)} />
+            <Button  icon="pi pi-pencil" className="p-button-rounded p-button-warning" onClick={()=> navigate(`/new/${rowData.id}`) } />
+        </>
+    );
+}
+  
+  const statusBodyTemplate = (rowData) => {
+    return <span className='badge' style={{width: '80px', backgroundColor: rowData.statuscode === 'Aberto' ? '#3583f6' : rowData.statuscode === 'Finalizado' ? '#5cb85c' : '#999'}}>
+              {rowData.statuscode}
+           </span>;
+}  
 
   if (loading) {
     return (
@@ -141,42 +162,23 @@ export function Dashboard() {
               Novo chamado
             </Link>
 
-            <table>
-              <thead>
-                <tr>
-                  <th scope="col">Cliente</th>
-                  <th scope="col">Assunto</th>
-                  <th scope="col">Status</th>
-                  <th scope="col">Cadastrado em</th>
-                  <th scope="col">#</th>
-                </tr>
-              </thead>
-              <tbody>
-                {chamados.map((item, index) => {
-                  return (
-                    <tr key={index}>
-                      <td data-label="Cliente">{item.cliente}</td>
-                      <td data-label="Assunto">{item.assunto}</td>
-                      <td data-label="Status">
-                        <span className="badge" style={{ backgroundColor: item.statuscode === 'Aberto' ? '#3583f6' : item.statuscode === 'Finalizado' ? '#5cb85c' : '#999'}}>{item.statuscode}</span>
-                      </td>
-                      <td data-label="Cadastrado">{item.createdFormated}</td>
-                      <td data-label="#">
-                        <button className="action" style={{ backgroundColor: '#3583f6' }} onClick={()=> togglePostModal(item)}>
-                          <FiSearch color="#FFF" size={17} />
-                        </button>
-                        <Link className="action" style={{ backgroundColor: '#F6a935' }} to={`/new/${item.id}`}>
-                          <FiEdit2 color="#FFF" size={17} />
-                        </Link>
-                      </td>
-                    </tr>
-                  )
-                })}
-              </tbody>
-            </table>
+            <DataTable
+                  value={chamados}
+                  responsiveLayout='scroll'
+                  paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+                  dataKey='id'
+                  paginator
+                  emptyMessage='No data found'
+                  rows={10}
+                  size='small'
+                >
+                    <Column field="cliente" header="Cliente" sortable filter />
+                    <Column field="assunto" header="Assunto"  sortable />
+                    <Column header="Status" body={statusBodyTemplate} />
+                    <Column field="createdFormated" header="Data" />
+                    <Column body={actionBodyTemplate} align={'center'}></Column>
+                </DataTable>
 
-            {loadingMore && <h3 style={{ textAlign: 'center', marginTop: 15 }}>Buscando dados...</h3>}
-            {!loadingMore && !isEmpty && <button className="btn-more" onClick={handleMore}>Buscar mais</button>}
           </>
         )}
 

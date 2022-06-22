@@ -24,14 +24,21 @@
     background-color: #F65835;
     border: 0;
     color: #FFF;
-    position: absolute;
-    top: 15px;
-    left: 15px;
+    position: relative;
+    top: 40px;
+    left: 34em;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 4px 15px;
     border-radius: .3em;
+    transition: all 1s;
+}
+
+.close:hover{
+    background-color: #da8471;
+    color: #000;
+    font-weight: 500;
 }
 
 .close svg{
