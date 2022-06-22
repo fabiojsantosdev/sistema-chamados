@@ -20,6 +20,15 @@ export function SignUp() {
     }
   }
 
+  const handleDisableBt = ()=>{
+    if(nome !== ''&& email !== '' && password !== ''){
+      return(false);
+
+    }else{
+        return(true);
+    }
+  }
+
   return (
     <div className='container-center' >
       <div className='login'>
@@ -31,7 +40,7 @@ export function SignUp() {
           <input type="text" placeholder='Seu Nome' value={nome} onChange={(e) => setNome(e.target.value)}/>
           <input type="text" placeholder='email@email.com' value={email} onChange={(e) => setEmail(e.target.value)}/>
           <input type="password" placeholder='**********'  value={password} onChange={(e) => setPassword(e.target.value)}/>
-          <button type='submit'>{loadingAuth ? <Spinner weight="bold" size={35} className="CircleNotch"/> : 'Cadastrar'}</button>
+          <button type='submit' hidden={handleDisableBt()}>{loadingAuth ? <Spinner weight="bold" size={35} className="CircleNotch"/> : 'Cadastrar'}</button>
         </form>
         <Link to='/'>Já possuo cadastro? Entre</Link>
       </div>  
