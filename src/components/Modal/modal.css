@@ -71,3 +71,15 @@
     padding-top: .5em;
     white-space: pre-wrap;
 }
+
+@media screen and (max-width: 720px) {
+
+    .modal .container{
+        max-width: 400px;
+    }
+
+    .close{
+        left: 0;
+    }
+
+}

@@ -66,11 +66,18 @@
     .sidebar{
         width: 100%;
         height: auto;
-        position: relative;
+        position: fixed;
+        z-index: 99;
+        font-size: 0.75rem;
     }
+
 
     div.content{
         margin-left: 0;
+    }
+
+    .content{
+        padding: 55px 10px 0px 10px;
     }
     
     .sidebar a{
@@ -81,19 +88,27 @@
         display: none;
     }
 
+    .sidebar svg{
+        height: 20px;
+        width: 20px;
+    }
+
     /* .sidebar a svg{
         display: none;
     }    */
 }
 
-/*css resposivo max 400px*/
+
+/* css resposivo max 400px
 @media screen and (max-width: 400px){
     .sidebar a{
         text-align: center;
         float: none;
     }
 
-    /*.sidebar a svg{
+    
+
+    .sidebar a svg{
         display: none;
-    } */   
-}
+    }   
+}  */

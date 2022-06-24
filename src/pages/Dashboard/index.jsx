@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Header } from '../../components/Header';
 import { Title } from '../../components/Title';
 import { AiOutlineDashboard } from "react-icons/ai";
@@ -84,16 +84,6 @@ export function Dashboard() {
 
   }
 
-
-  // async function handleMore() {
-  //   setLoadingMore(true);
-  //   await listRef.startAfter(lastDocs).limit(100)
-  //     .get()
-  //     .then((snapshot) => {
-  //       updateState(snapshot)
-  //     })
-  // }
-
   function togglePostModal(rowData){
     setShowPostModal(!showPostModal);
     setDetail(rowData);
@@ -103,15 +93,15 @@ export function Dashboard() {
 
   const actionBodyTemplate = (rowData) => {
     return (
-        <>
-            <Button icon="pi pi-search" className="p-button-rounded p-button-info mr-2" onClick={()=> togglePostModal(rowData)} />
+        <section>
+            <Button  icon="pi pi-search" className="p-button-rounded p-button-info mr-1" onClick={()=> togglePostModal(rowData)} />
             <Button  icon="pi pi-pencil" className="p-button-rounded p-button-warning" onClick={()=> navigate(`/new/${rowData.id}`) } />
-        </>
+        </section>
     );
 }
   
   const statusBodyTemplate = (rowData) => {
-    return <span className='badge' style={{width: '80px', backgroundColor: rowData.statuscode === 'Aberto' ? '#3583f6' : rowData.statuscode === 'Finalizado' ? '#5cb85c' : '#999'}}>
+    return <span className='badge' style={{backgroundColor: rowData.statuscode === 'Aberto' ? '#3583f6' : rowData.statuscode === 'Finalizado' ? '#5cb85c' : '#999'}}>
               {rowData.statuscode}
            </span>;
 }  
@@ -139,7 +129,9 @@ export function Dashboard() {
 
   return (
     <div>
+      <>
       <Header />
+      </>
 
       <div className="content">
         <Title name="Atendimentos">
@@ -164,7 +156,7 @@ export function Dashboard() {
 
             <DataTable
                   value={chamados}
-                  responsiveLayout='scroll'
+                  responsiveLayout='stack'
                   paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
                   dataKey='id'
                   paginator

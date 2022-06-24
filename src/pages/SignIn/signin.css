@@ -64,13 +64,27 @@ form button{
     background-color: #181C2E;
     color: #FFF;
     font-size: 1.3em;
+    transition: all 3ms;
 }
 
 form button:hover{
-    background-color: #172677;
-    transition: all 2ms;
+    background-color: #015997;
+    
 }
 
+form button:disabled{
+    background-color: #6c6c6c;
+    cursor: not-allowed;
+}
+
+.span{
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.span a{
+    padding: .3em;
+}
 
 .CircleNotch{
     background-color: none;

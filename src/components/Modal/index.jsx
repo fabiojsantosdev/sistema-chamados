@@ -19,6 +19,8 @@ export default function Modal({ conteudo, close }) {
             <span>
               Assunto: <i>{conteudo.assunto}</i>
             </span>
+            <br />
+            <br />
             <span>
               Cadastrado em: <i>{conteudo.createdFormated}</i>
             </span>

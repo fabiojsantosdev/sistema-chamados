@@ -55,6 +55,8 @@ function AuthProvider({ children }) {
           console.log(error);
           if(error.code === "auth/wrong-password" || error.code === 'auth/user-not-found'){
             toast.error('E-mail ou senha incorreto.');
+          }else if(error.code === 'auth/invalid-email'){
+            toast.error('Endereço de e-mail formato inválido.' );
           }else{toast.error('Ops Algo deu errado');}
           setLoadingAuth(false);
         
