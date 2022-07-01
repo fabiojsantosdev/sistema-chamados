@@ -1,4 +1,5 @@
 import { Header } from '../../components/Header';
+import  Appbar from '../../components/Appbar';
 import { Title } from '../../components/Title';
 import { useState } from 'react';
 import { FiUser } from 'react-icons/fi';
@@ -40,6 +41,7 @@ export function Customers(){
 
     return(
         <div>
+            <Appbar/>
             <Header/>
             <div className='content'>
             <Title name={'Clientes'}>

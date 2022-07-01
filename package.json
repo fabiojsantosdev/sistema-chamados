@@ -8,6 +8,10 @@
     "preview": "vite preview --host 0.0.0.0"
   },
   "dependencies": {
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.9.3",
+    "@mui/icons-material": "^5.8.4",
+    "@mui/material": "^5.8.6",
     "date-fns": "^2.28.0",
     "firebase": "^8.8.1",
     "phosphor-react": "^1.4.1",

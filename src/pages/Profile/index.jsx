@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
 import { AuthContext } from '../../contexts/auth';
 import { Header } from '../../components/Header';
+import  Appbar from '../../components/Appbar';
 import { Title } from '../../components/Title';
 import { FiSettings, FiUpload } from 'react-icons/fi';
 import avatar from '../../assets/avatar.png';
@@ -11,7 +12,7 @@ import './profile.css';
 
 
 export function Profile() {
-    
+
     const { user, signOut, setUser, storageUser } = useContext(AuthContext);
     const [nome, setNome] = useState(user && user.nome);
     const [email, setEmail] = useState(user && user.email);
@@ -19,52 +20,52 @@ export function Profile() {
     const [imageAvatar, setImageAvatar] = useState(null);
 
 
-    function handleFile(e){
+    function handleFile(e) {
         const image = e.target.files[0];
 
-        if(image.type === 'image/jpg' || image.type === 'image/png'){
+        if (image.type === 'image/jpg' || image.type === 'image/png') {
             setImageAvatar(image);
             setAvatarUrl(URL.createObjectURL(e.target.files[0]));
-        }else{
-            Swal.fire('Formato invalido e aceito apenas JPG/PNG','', 'info' ).then(()=>{
-            setImageAvatar(null);
-            return null;
+        } else {
+            Swal.fire('Formato invalido e aceito apenas JPG/PNG', '', 'info').then(() => {
+                setImageAvatar(null);
+                return null;
             });
         }
         //console.log(e.target.files[0]);
     }
 
-    async function handleUpload(){
+    async function handleUpload() {
         const currentUid = user.uid;
 
-        const uploadTask =  await firebase.storage()
-        .ref(`images/${currentUid}/${imageAvatar.name}`)
-        .put(imageAvatar)
-        .then(async ()=>{
-            console.log('Foto enviada');
-            
-            await firebase.storage().ref(`images/${currentUid}`)
-            .child(imageAvatar.name).getDownloadURL()
-            .then(async (url)=>{
-                let urlFoto = url;
+        const uploadTask = await firebase.storage()
+            .ref(`images/${currentUid}/${imageAvatar.name}`)
+            .put(imageAvatar)
+            .then(async () => {
+                console.log('Foto enviada');
 
-                await firebase.firestore().collection('users')
-                .doc(user.uid)
-                .update({
-                    avatarUrl: urlFoto,
-                    nome: nome
-                })
-                .then(()=>{
-                    let data = {
-                        ...user,
-                        avatarUrl: urlFoto,
-                        nome: nome
-                    };
-                    setUser(data);
-                    storageUser(data);
-                })
+                await firebase.storage().ref(`images/${currentUid}`)
+                    .child(imageAvatar.name).getDownloadURL()
+                    .then(async (url) => {
+                        let urlFoto = url;
+
+                        await firebase.firestore().collection('users')
+                            .doc(user.uid)
+                            .update({
+                                avatarUrl: urlFoto,
+                                nome: nome
+                            })
+                            .then(() => {
+                                let data = {
+                                    ...user,
+                                    avatarUrl: urlFoto,
+                                    nome: nome
+                                };
+                                setUser(data);
+                                storageUser(data);
+                            })
+                    })
             })
-        })
     }
 
     function handleSave(e) {
@@ -81,7 +82,7 @@ export function Profile() {
                 confirmButtonColor: '#181C2E',
             }).then(async (result) => {
                 if (result.isConfirmed) {
-                  await  firebase.firestore().collection('users')
+                    await firebase.firestore().collection('users')
                         .doc(user.uid)
                         .update({
                             nome: nome
@@ -94,18 +95,18 @@ export function Profile() {
                             setUser(data);
                             storageUser(data);
                         })
-                    Swal.fire('Perfil alterado com Sucesso!', '', 'success').then(()=> {
-                        
+                    Swal.fire('Perfil alterado com Sucesso!', '', 'success').then(() => {
+
                     })
 
                 } else if (result.isDenied || result.isDismissed) {
-                    Swal.fire('As alterações não foram salvas.', '', 'info').then(()=> {
+                    Swal.fire('As alterações não foram salvas.', '', 'info').then(() => {
                         window.location.reload();
                     })
 
                 }
             })
-        }else if(nome !== '' && imageAvatar !== null){
+        } else if (nome !== '' && imageAvatar !== null) {
             Swal.fire({
                 title: 'Deseja salvar as alterações?',
                 icon: 'question',
@@ -120,18 +121,18 @@ export function Profile() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     handleUpload();
-                    Swal.fire('Perfil alterado com Sucesso!', '', 'success').then(()=> {
+                    Swal.fire('Perfil alterado com Sucesso!', '', 'success').then(() => {
                         window.location.reload();
                     })
 
                 } else if (result.isDenied || result.isDismissed) {
-                    Swal.fire('As alterações não foram salvas.', '', 'info').then(()=> {
+                    Swal.fire('As alterações não foram salvas.', '', 'info').then(() => {
                         window.location.reload();
                     })
 
                 }
             })
-            
+
         }
     }
 
@@ -154,6 +155,7 @@ export function Profile() {
 
     return (
         <div>
+            <Appbar />
             <Header />
             <div className='content'>
                 <Title name="Meu Perfil">
@@ -167,7 +169,7 @@ export function Profile() {
                                 <FiUpload color='#FFF' size={25} />
                             </span>
 
-                            <input type="file" accept='image/*' onChange={handleFile}/><br />
+                            <input type="file" accept='image/*' onChange={handleFile} /><br />
 
                             {avatarUrl === null ?
                                 <img src={avatar} width='250' height='250' alt='Foto de perfil do usuário' />

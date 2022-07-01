@@ -1,4 +1,5 @@
 import { Header } from '../../components/Header';
+import  Appbar from '../../components/Appbar';
 import { Title } from '../../components/Title';
 import { FiPlusCircle, FiEdit } from 'react-icons/fi';
 import { useState, useEffect, useContext, useRef } from 'react';
@@ -19,7 +20,7 @@ export function New() {
     const [statuscode, setStatuscode] = useState('Aberto');
     const [complemento, setComplemento] = useState('');
     const { user } = useContext(AuthContext);
-    const [idCustomer,setIdCustomer] = useState(false);
+    const [idCustomer, setIdCustomer] = useState(false);
 
 
     useEffect(() => {
@@ -46,8 +47,8 @@ export function New() {
                     setCustomers(lista);
                     setLoadCustomers(false);
 
-                    if(id){
-                        loadId(lista);    
+                    if (id) {
+                        loadId(lista);
                     }
 
                 })
@@ -61,50 +62,50 @@ export function New() {
     }, [id]);
 
 
-    async function loadId(lista){
+    async function loadId(lista) {
         await firebase.firestore().collection('chamados').doc(id)
-        .get()
-        .then((snapshot)=>{
-            setAssunto(snapshot.data().assunto);
-            setStatuscode(snapshot.data().statuscode);
-            setComplemento(snapshot.data().complemento);
+            .get()
+            .then((snapshot) => {
+                setAssunto(snapshot.data().assunto);
+                setStatuscode(snapshot.data().statuscode);
+                setComplemento(snapshot.data().complemento);
 
-            let index = lista.findIndex(item => item.id === snapshot.data().clienteId);
-            setCustomersSelected(index);
-            setIdCustomer(true);
-            
-        })
-        .catch((err)=>{
-            console.log('chamado não encontado com id', err);
-        })
+                let index = lista.findIndex(item => item.id === snapshot.data().clienteId);
+                setCustomersSelected(index);
+                setIdCustomer(true);
+
+            })
+            .catch((err) => {
+                console.log('chamado não encontado com id', err);
+            })
     }
 
 
     async function handleChamado(e) {
         e.preventDefault();
 
-        if(idCustomer){
+        if (idCustomer) {
             await firebase.firestore().collection('chamados')
-            .doc(id)
-            .update({
-                cliente: customers[customersSelected].nomefantasia,
-                clienteId: customers[customersSelected].id,
-                assunto: assunto,
-                complemento: complemento,
-                statuscode: statuscode,
-                userId: user.uid
-            })
-            .then(()=>{
-                toast.success('Chamado editado com sucesso');
-                setCustomersSelected(0);
-                setComplemento('');
-                navigate('/dashboard');
-                
-                
-            })
-            .catch((err)=>{
-                console.log('Erro ao editar chamado', err);
-            })
+                .doc(id)
+                .update({
+                    cliente: customers[customersSelected].nomefantasia,
+                    clienteId: customers[customersSelected].id,
+                    assunto: assunto,
+                    complemento: complemento,
+                    statuscode: statuscode,
+                    userId: user.uid
+                })
+                .then(() => {
+                    toast.success('Chamado editado com sucesso');
+                    setCustomersSelected(0);
+                    setComplemento('');
+                    navigate('/dashboard');
+
+
+                })
+                .catch((err) => {
+                    console.log('Erro ao editar chamado', err);
+                })
             return;
         }
 
@@ -146,10 +147,11 @@ export function New() {
 
     return (
         <div>
+            <Appbar />
             <Header />
             <div className='content'>
-                <Title name={idCustomer ? 'Alterar chamado': 'Novo chamado'}>
-                    {idCustomer ? <FiEdit size={25}/>: <FiPlusCircle size={25} />}
+                <Title name={idCustomer ? 'Alterar chamado' : 'Novo chamado'}>
+                    {idCustomer ? <FiEdit size={25} /> : <FiPlusCircle size={25} />}
                 </Title>
 
                 <div className='container'>
@@ -195,7 +197,7 @@ export function New() {
                         <label>Complemento</label>
                         <textarea type='text' placeholder='Descreva seu problema (Opcional).' value={complemento} onChange={(e) => setComplemento(e.target.value)}></textarea>
 
-                        <button type='submit'>{idCustomer ? 'Salvar': 'Registrar'}</button>
+                        <button type='submit'>{idCustomer ? 'Salvar' : 'Registrar'}</button>
                     </form>
                 </div>
 

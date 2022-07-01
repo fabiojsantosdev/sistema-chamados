@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Header } from '../../components/Header';
+import Appbar from '../../components/Appbar';
 import { Title } from '../../components/Title';
 import { AiOutlineDashboard } from "react-icons/ai";
 import { FiPlus } from "react-icons/fi";
@@ -26,7 +27,7 @@ export function Dashboard() {
   const [showPostModal, setShowPostModal] = useState(false);
   const [detail, setDetail] = useState();
 
-  useEffect(() =>  {
+  useEffect(() => {
 
     loadChamados();
 
@@ -36,14 +37,14 @@ export function Dashboard() {
 
   async function loadChamados() {
     await listRef.limit(10000)
-    .get()
-    .then((snapshot) => {
-      updateState(snapshot)
-    })
-    .catch((err)=>{
-      console.log('Erro ao buscar chamados: ', err);
-      setLoadingMore(false);
-    })
+      .get()
+      .then((snapshot) => {
+        updateState(snapshot)
+      })
+      .catch((err) => {
+        console.log('Erro ao buscar chamados: ', err);
+        setLoadingMore(false);
+      })
 
     setLoading(false);
 
@@ -71,9 +72,9 @@ export function Dashboard() {
 
       const lastDoc = snapshot.docs[snapshot.docs.length - 1]; //Pegando o ultimo documento buscado
 
- 
+
       setChamados(chamados => [...chamados, ...lista]);
-      
+
       setLastDocs(lastDoc);
 
     } else {
@@ -84,31 +85,32 @@ export function Dashboard() {
 
   }
 
-  function togglePostModal(rowData){
+  function togglePostModal(rowData) {
     setShowPostModal(!showPostModal);
     setDetail(rowData);
     console.log(rowData);
-    
+
   }
 
   const actionBodyTemplate = (rowData) => {
     return (
-        <section>
-            <Button  icon="pi pi-search" className="p-button-rounded p-button-info mr-1" onClick={()=> togglePostModal(rowData)} />
-            <Button  icon="pi pi-pencil" className="p-button-rounded p-button-warning" onClick={()=> navigate(`/new/${rowData.id}`) } />
-        </section>
+      <section>
+        <Button icon="pi pi-search" className="p-button-rounded p-button-info mr-1" onClick={() => togglePostModal(rowData)} />
+        <Button icon="pi pi-pencil" className="p-button-rounded p-button-warning" onClick={() => navigate(`/new/${rowData.id}`)} />
+      </section>
     );
-}
-  
+  }
+
   const statusBodyTemplate = (rowData) => {
-    return <span className='badge' style={{backgroundColor: rowData.statuscode === 'Aberto' ? '#3583f6' : rowData.statuscode === 'Finalizado' ? '#5cb85c' : '#999'}}>
-              {rowData.statuscode}
-           </span>;
-}  
+    return <span className='badge' style={{ backgroundColor: rowData.statuscode === 'Aberto' ? '#3583f6' : rowData.statuscode === 'Finalizado' ? '#5cb85c' : '#999' }}>
+      {rowData.statuscode}
+    </span>;
+  }
 
   if (loading) {
     return (
       <div>
+        <Appbar />
         <Header />
 
         <div className="content">
@@ -129,12 +131,10 @@ export function Dashboard() {
 
   return (
     <div>
-      <>
+      <Appbar />
       <Header />
-      </>
-
-      <div className="content">
-        <Title name="Atendimentos">
+      <div>
+        <Title name="Atendimentos" >
           <AiOutlineDashboard size={25} />
         </Title>
 
@@ -155,21 +155,22 @@ export function Dashboard() {
             </Link>
 
             <DataTable
-                  value={chamados}
-                  responsiveLayout='stack'
-                  paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
-                  dataKey='id'
-                  paginator
-                  emptyMessage='No data found'
-                  rows={10}
-                  size='small'
-                >
-                    <Column field="cliente" header="Cliente" sortable filter />
-                    <Column field="assunto" header="Assunto"  sortable />
-                    <Column header="Status" body={statusBodyTemplate} />
-                    <Column field="createdFormated" header="Data" />
-                    <Column body={actionBodyTemplate} align={'center'}></Column>
-                </DataTable>
+              value={chamados}
+              responsiveLayout='stack'
+              paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+              dataKey='id'
+              paginator
+              emptyMessage='No data found'
+              rows={10}
+              size='small'
+              resizableColumns
+            >
+              <Column field="cliente" header="Cliente" sortable filter style={{ width: '35vh' }} />
+              <Column field="assunto" header="Assunto" sortable style={{ width: '35vh' }} />
+              <Column header="Status" body={statusBodyTemplate} style={{ width: '35vh' }} />
+              <Column field="createdFormated" header="Data" style={{ width: '35vh' }} />
+              <Column body={actionBodyTemplate} align={'center'} style={{ width: '35vh' }}></Column>
+            </DataTable>
 
           </>
         )}
@@ -177,7 +178,7 @@ export function Dashboard() {
       </div>
 
       {showPostModal && (
-        <Modal 
+        <Modal
           conteudo={detail}
           close={togglePostModal}
         />

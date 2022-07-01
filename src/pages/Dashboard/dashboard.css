@@ -10,11 +10,18 @@
     font-weight: 600;
     font-size: 1.2em;
   }
+
+  .p-datatable{
+    justify-content: center;
+    align-items: center;
+    margin: 0 3em;
+  }
   
   .new{
     float:nome;
-    width: 180px;
-    margin-bottom: 1.5em;
+    width: 160px;
+    margin: 0 3.2em;
+    margin-bottom: 1em;
     background-color: #83bf02;
     color: #FFF;
     border:0;
@@ -27,6 +34,7 @@
     border-radius: 6px;
     transition: ease-in 0.2s;
   }
+
   
   .new svg{
     margin-right: 5px;
@@ -35,11 +43,8 @@
   .new:hover{
     background-color: #5fd204;
     transform: scale(1.1);
+    
   }
-
-/* .bttable{
-  justify-content: flex-start;
-} */
 
 table td .badge{
   padding: 2px;
@@ -48,6 +53,10 @@ table td .badge{
 }
 
 @media screen and (max-width: 720px) {
+
+  .p-datatable ,.new{
+    margin: 0 .5em .5em;
+  }
 
   table td .badge{
     text-align: center;
