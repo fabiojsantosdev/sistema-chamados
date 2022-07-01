@@ -39,14 +39,15 @@ export default function Modal({ conteudo, close }) {
                 {conteudo.complemento}
               </p>
 
-              <button className="close" onClick={close}>
-                <FiX size={23} color="#FFF" />
-                Voltar
-              </button>
+
             </>
           )}
 
         </div>
+        <button className="close" onClick={close}>
+          <FiX size={23} color="#FFF" />
+          Voltar
+        </button>
       </div>
     </div>
   )
