@@ -19,20 +19,11 @@ export function Header() {
     const navigate = useNavigate();
     const theme = useTheme();
     
-
-    const routeDashboard = ()=>{
-        navigate('/dashboard');
+    const handleBtClick = (rota)=>{
+        navigate(rota);
         toggleDrawerOpen()
     }
 
-    const routeCustomers = ()=>{
-        navigate('/customers');
-        toggleDrawerOpen()
-    }
-    const routeProfile = ()=>{
-        navigate('/profile');
-        toggleDrawerOpen()
-    }
 
     const handleLogout = () => {
         toggleDrawerOpen()
@@ -92,9 +83,9 @@ export function Header() {
                 alignItems='flex-start'
                 marginTop={theme.spacing(5)}
             >
-                <Button sx={{ color: '#FFF' }} variant="text" startIcon={<AddToQueueIcon />} onClick={routeDashboard}>Chamados</Button>
-                <Button sx={{ color: '#FFF' }} variant="text" startIcon={<PersonIcon />} onClick={routeCustomers}>Clientes</Button>
-                <Button sx={{ color: '#FFF' }} variant="text" startIcon={<ManageAccountsIcon />} onClick={routeProfile}>Perfil</Button>
+                <Button sx={{ color: '#FFF' }} variant="text" startIcon={<AddToQueueIcon />} onClick={(e)=> handleBtClick('/dashboard')}>Chamados</Button>
+                <Button sx={{ color: '#FFF' }} variant="text" startIcon={<PersonIcon />} onClick={(e)=> handleBtClick('/customers') }>Clientes</Button>
+                <Button sx={{ color: '#FFF' }} variant="text" startIcon={<ManageAccountsIcon />} onClick={(e)=> handleBtClick('/profile')}>Perfil</Button>
                 <Button sx={{ color: '#FFF' }} variant="text" startIcon={<LogoutIcon />} onClick={() => handleLogout()}>Sair</Button>
             </Box>
         </Drawer>
