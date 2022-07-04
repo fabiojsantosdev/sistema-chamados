@@ -14,8 +14,7 @@ export function Routers(){
     const {isLogged} = useContext(AuthContext);
 
     return(
-
-        <BrowserRouter>
+        
             <Routes>
                 <Route exact path="/" element={ isLogged ? <Dashboard/> : <SignIn/>}/>
                 <Route exact path="/register" element={isLogged ? <Dashboard/> : <SignUp/>}/>
@@ -25,6 +24,5 @@ export function Routers(){
                 <Route exact path="/new" element={ isLogged ? <New/> : <SignIn/>}/>
                 <Route exact path="/new/:id" element={ isLogged ? <New/> : <SignIn/>}/>
             </Routes>
-        </BrowserRouter>
     )
 }

@@ -9,11 +9,6 @@ function AuthProvider({ children }) {
 
   const [user, setUser] = useState(null);
   const [loadingAuth, setLoadingAuth] = useState(false);
-  const [isDrawerOpen, SetIsDrawerOpen] = useState(false);
-
-  const toggleDrawerOpen = useCallback(() => {
-    SetIsDrawerOpen(oldOpenDrawer => !oldOpenDrawer);
-  }, []);
 
   useEffect(() => {
 
@@ -133,8 +128,6 @@ function AuthProvider({ children }) {
       loadingAuth,
       setUser,
       storageUser,
-      isDrawerOpen,
-      toggleDrawerOpen,
     }}>
       {children}
     </AuthContext.Provider>

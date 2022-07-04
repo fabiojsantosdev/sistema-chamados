@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {useContext} from 'react';
 import {AuthContext} from '../../contexts/auth';
+import { DrawerContext } from '../../contexts/drawerContext';
 import AppBar from '@mui/material/AppBar';
 import avatar from '../../assets/avatar.png';
 import Box from '@mui/material/Box';
@@ -17,7 +18,8 @@ import 'sweetalert2/dist/sweetalert2.css';
 
 const Appbar = () => {
 
-    const { user, signOut, toggleDrawerOpen} = useContext(AuthContext);
+    const { user, signOut} = useContext(AuthContext);
+    const { toggleDrawerOpen } = useContext(DrawerContext);
     const navigate = useNavigate();
     const theme = useTheme();
     const [anchorEl, setAnchorEl] = React.useState(null);

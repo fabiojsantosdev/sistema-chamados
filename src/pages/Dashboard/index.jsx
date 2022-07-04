@@ -8,11 +8,11 @@ import { Link } from 'react-router-dom';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
-import 'primereact/resources/themes/nova-alt/theme.css';
 import firebase from '../../services/firebaseConnection';
 import { format } from 'date-fns';
 import Modal from '../../components/Modal';
 import { useNavigate } from 'react-router-dom';
+import 'primereact/resources/themes/nova-alt/theme.css';
 import './dashboard.css';
 
 const listRef = firebase.firestore().collection('chamados').orderBy('created', 'desc');

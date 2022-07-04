@@ -1,7 +1,8 @@
 import { useContext } from 'react';
 import { AuthContext } from '../../contexts/auth';
+import { DrawerContext } from '../../contexts/drawerContext';
 import { useNavigate } from 'react-router-dom';
-import { Avatar, Button, Divider, Drawer, useTheme } from '@mui/material';
+import { Avatar, Button, Drawer, useTheme } from '@mui/material';
 import Box from '@mui/material/Box';
 import AddToQueueIcon from '@mui/icons-material/AddToQueue';
 import PersonIcon from '@mui/icons-material/Person';
@@ -15,7 +16,8 @@ import 'sweetalert2/dist/sweetalert2.css';
 
 export function Header() {
 
-    const { user, signOut, isDrawerOpen, toggleDrawerOpen } = useContext(AuthContext);
+    const { user, signOut } = useContext(AuthContext );
+    const { isDrawerOpen, toggleDrawerOpen } = useContext(DrawerContext);
     const navigate = useNavigate();
     const theme = useTheme();
     

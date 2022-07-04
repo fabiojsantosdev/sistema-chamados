@@ -1,9 +1,9 @@
 import { useState, useContext } from 'react';
-import './signin.css';
 import logo from '../../assets/logo.png';
 import { Link } from 'react-router-dom';
 import {AuthContext} from '../../contexts/auth';
 import { Spinner } from "phosphor-react";
+import './signin.css';
 
 
 export function SignIn() {
