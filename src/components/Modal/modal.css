@@ -32,8 +32,8 @@
     border: 0;
     color: #FFF;
     position: relative;
-    top: 23.5vh;
-    left: 14vw;
+    top: 14vh;
+    left: 7vw;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -79,7 +79,7 @@
     white-space: pre-wrap;
 }
 
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 620px) {
 
     .modal .container{
         max-width: 350px;
@@ -95,3 +95,4 @@
     }
 
 }
+
